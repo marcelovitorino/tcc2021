@@ -1,0 +1,241 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Structural Health Monitoring - SHM - API - (UFCG/UFPB/UNB)",
+        "description": "API to receive reads from arduino and store it at a cloud based database",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        }
+    ],
+    "paths": {
+        "/accelerations": {
+            "get": {
+                "tags": [
+                    "Accelerations"
+                ],
+                "summary": "Get all accelerations in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Accelerations"
+                        }
+                    }
+                }
+            }
+        },
+        "/addAcceleration": {
+            "post": {
+                "tags": [
+                    "Accelerations"
+                ],
+                "description": "Create new accelerations in system",
+                "parameters": [
+                    {
+                        "name": "acceleration",
+                        "in": "body",
+                        "description": "Acceleration that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Acceleration"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New accelerations is created",
+                        "schema": {
+                            "$ref": "#/definitions/Acceleration"
+                        }
+                    }
+                }
+            }
+        },
+        "/geolocations": {
+            "get": {
+                "tags": [
+                    "Geolocations"
+                ],
+                "summary": "Get all geolocations in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Geolocations"
+                        }
+                    }
+                }
+            }
+        },
+        "/addGeolocation": {
+            "post": {
+                "tags": [
+                    "Geolocations"
+                ],
+                "description": "Create new geolocation in system",
+                "parameters": [
+                    {
+                        "name": "geolocation",
+                        "in": "body",
+                        "description": "Geolocation that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Geolocation"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New geolocation is created",
+                        "schema": {
+                            "$ref": "#/definitions/Geolocation"
+                        }
+                    }
+                }
+            }
+        },
+        "/lastReads": {
+            "get": {
+                "tags": [
+                    "Accelerations"
+                ],
+                "summary": "Get last 1000 accelerations in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Accelerations"
+                        }
+                    }
+                }
+            }
+        },
+        "/lastGeolocation": {
+            "get": {
+                "tags": [
+                    "Geolocations"
+                ],
+                "summary": "Get last geolocation in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Geolocation"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Acceleration": {
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "accel": {
+                            "type": "object",
+                            "properties": {
+                                "accelX": {
+                                    "type": "number"
+                                },
+                                "accelY": {
+                                    "type": "number"
+                                },
+                                "accelZ": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "gyro": {
+                            "type": "object",
+                            "properties": {
+                                "gyroX": {
+                                    "type": "number"
+                                },
+                                "gyroY": {
+                                    "type": "number"
+                                },
+                                "gyroZ": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "temp": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "nodeID": {
+                    "type": "string"
+                }
+            }
+        },
+        "Accelerations": {
+            "type": "array",
+            "$ref": "#/definitions/Acceleration"
+        },
+        "Geolocation": {
+            "required": [
+            ],
+            "properties": {
+                "_id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "city": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "lat": {
+                    "type": "number"
+                },
+                "lon": {
+                    "type": "number"
+                },
+                "query": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                }
+            }
+        },
+        "Geolocations": {
+            "type": "array",
+            "$ref": "#/definitions/Geolocation"
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ]
+}
