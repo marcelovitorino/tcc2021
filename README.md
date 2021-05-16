@@ -1,4 +1,8 @@
 # tcc2021
+
+Desenvolvido por: Marcelo Vitorino
+Data: 03/2021
+
 Sistema de Hardware e Software para Monitoramento Estrutural de Edificações
 
 Este repositório contém o código dos seguintes substistemas:
